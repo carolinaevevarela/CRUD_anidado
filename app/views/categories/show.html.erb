@@ -4,17 +4,6 @@
 
 <h2>Productos</h2>
 
-<ul>
-<% @product.each do |p| %>
-  <li><%= p.name %> <%= link_to "x", category_product_path(@category, product),
-    method: :delete%>
-  </li>
-  <li><%= p.price %> <%= link_to "x", category_product_path(@category, product),
-    method: :delete%>
-  </li>
-<% end %>
-</ul>
-
   <%= form_with(model: [@category, Product.new], local: true) do |f| %>
   <%= f.hidden_field :category_id, value: @category.id %>
     <div class="">
@@ -29,6 +18,14 @@
     <%= f.submit %>
   </div>
   <% end %>
+
+  <ul>
+  <% @product.each do |p| %>
+    <%= p.name %>
+      <%= p.price %> <%= link_to "Borrar", category_product_path(category_id: @category.id, id: p.id),
+      method: :delete %>
+  <% end %>
+  </ul>
 
 
 <%= link_to 'Edit', edit_category_path(@category) %> |
